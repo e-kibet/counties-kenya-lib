@@ -5,7 +5,7 @@ import constants from "./constants"
 
 const queue = fastq.promise(worker, constants.WORKER_CONCURRENCY)
 
-async function worker() {
+async function processCounties() {
   const targetUrl = constants.KENYA_COUNTIES_URL;
   const pageResponse = await axios.get(targetUrl);
   const $ = cheerio.load(pageResponse.data);
@@ -31,11 +31,18 @@ async function worker() {
   return result
 }
 
+async function worker() {
+  let resultSet = await processCounties()
+  return resultSet
+}
+
 async function run() {
   let result = await queue.push({})
-  console.info(JSON.stringify(result))
+  return result
 }
 
 run().catch(e => {
   console.error(e)
 })
+
+export default { processCounties }
