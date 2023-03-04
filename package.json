@@ -1,6 +1,6 @@
 {
   "name": "counties-kenya-lib",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "dev": "esr ./lib/index.ts",
     "example": "esr ./example/example.ts"
